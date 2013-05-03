@@ -29,4 +29,8 @@ Cute way will be the next:
       	or
 	    $: FILE_PRELOAD "execve+open+stat:/usr/bin/program_B:/usr/bin/program_B.old" ./program_C
     
-    (other) $: ./program_A    
+    (other) $: ./program_A   
+
+ 
+======================
+end of the story
