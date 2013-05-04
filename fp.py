@@ -4,8 +4,11 @@ import sys
 from optparse import OptionParser
 
 syscalls = [ #synonims
-    ["open","o"], 
-    ["execve","e"]
+    ["open"     ,"o","op","A"], 
+    ["execve"   ,"e","A"] ,
+    ["unlink"   ,"u","A"],
+    ["unlinkat" ,"u","A"],
+    ["stat" ,"s","A"]
 ]
 
 gtable = {}
@@ -28,9 +31,9 @@ def inform(k):
 
     f = h.get(k)
     if f == None:
-        exit(0)
+        exit(-2)
     print(h[k])
-    exit(0)
+    exit(-1)
 
 def add_call(coml):
     global gtable
@@ -76,11 +79,11 @@ def findinfo(l):
             r= i if (i<m) else -1
             return r
 
-def main(outfile):
+def main():
     global tcalls
     global lfunc
     a = sys.argv
-    print(a)
+    # print(a)
     pos = findinfo(a[1:])
 
     if pos < 0:
@@ -97,20 +100,14 @@ def main(outfile):
     res = "" + \
     header() + \
     statics() + \
-    ''.join(map(lambda x: "extern \"C\" "+x,tcallscode.values()))
+    ''.join(map(lambda x: "\nextern \"C\" "+x,tcallscode.values()))
 
-    
-    if outfile != None:
-        open(outfile,"w").write(res)
-    else:
-        print(res)
-    
-
-    
+    return res
+   
     # print(tcallscode)
     # print(tcalls)
 
-def gen_stat(ret,fname,args):
+def gen_static(ret,fname,args):
     stat = """
     static RETURN (*old_FNAME)(ARGS);"""
     stat = stat.replace("RETURN",ret)
@@ -122,7 +119,7 @@ def gen_stat(ret,fname,args):
 def gen_t0(ret,fname,args,args_res,genstat=True):
     global fstatic
     if genstat:
-        fstatic += [gen_stat(ret,fname,args)]
+        fstatic += [gen_static(ret,fname,args)]
 
     code = """
     RETURN_TYPE FNAME (ARGS_MAIN){
@@ -140,6 +137,8 @@ def gen_t0(ret,fname,args,args_res,genstat=True):
 
     return code
 
+
+
 def gen_mapstring(mapvar,files,patharg):
     code = ""
     code += "" +mapvar+"["+patharg+"]="+patharg+";\n      ";
@@ -156,30 +155,44 @@ def gen_tfiles0(files):
       PULL_FILES
       S newpath = files[S(PATH)]; 
     """
-    code = code.replace("PATH","pathname")
-    code = code.replace("PULL_FILES", gen_mapstring("files",files,"pathname"))
+    code = code.replace("PATH","p")
+    code = code.replace("PULL_FILES", gen_mapstring("files",files,"p"))
 
     return code
     
 
-def gen_open(files):
+def gen_open(files):                 #1 ! syscall
     code = gen_t0("I", "open",
-                  "const C *pathname, I flags, mode_t mode",
+                  "const C *p, I flags, mode_t mode",
                   "newpath.c_str(), flags, mode")
-    up = gen_tfiles0(files)
-    
-    code = code.replace("BODY",up)
-    return code
+    return code.replace("BODY",gen_tfiles0(files))
 
-def gen_execve(files):
+
+def gen_execve(files):               #2 ! sc
     code = gen_t0("I", "execve",
-                  "const char *pathname, char *const argv[], char *const envp[]",
+                  "const C *p, C *const argv[], C *const envp[]",
                   "newpath.c_str(), argv, envp")
-    up = gen_tfiles0(files)
-    
-    code = code.replace("BODY",up)
-    return code
-    
+    return code.replace("BODY",gen_tfiles0(files))
+
+def gen_unlinkat(files):             #3 ! sc
+    code = gen_t0("I", "unlinkat",
+                  "I dirfd, const C *p, int flags",
+                  "dirfd, newpath.c_str(), flags")
+    return code.replace("BODY",gen_tfiles0(files))
+
+
+def gen_unlink(files):               #4 ! sc
+    code = gen_t0("I", "unlink",
+                  "const C *p",
+                  "newpath.c_str()")
+    return code.replace("BODY",gen_tfiles0(files))
+
+def gen_stat(files):               #4 ! sc
+    code = gen_t0("I", "stat",
+                  "const C *p, struct stat *buf",
+                  "3, newpath.c_str(), buf")
+    return code.replace("BODY",gen_tfiles0(files))
+
 
 def header():
     return """
@@ -208,12 +221,24 @@ def statics():
 
 lfunc = locals()
 
-parser = OptionParser()
+usage = """
+usage: %prog [options] arg1 arg2"
+"""
+parser = OptionParser(usage)
 parser.add_option("-f", "--file", dest="filename",
                   help="write code to FILE", default=None)
+parser.add_option("-c", "--conf", dest="config",
+                  help="use config file instead of ARGV", default=None)
+
 
 (options, args) = parser.parse_args()
 
 if __name__ == "__main__" :    
-    main(options.filename)
+    code = main()
+    if (options.filename != None):
+        open(options.filename,"w").write(code)
+    else:
+        print(code)
+    
+
 
