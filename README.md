@@ -10,13 +10,15 @@ fp = FILE_PRELOAD
 File Preload like LD_PRELOAD
 
 
+Idea
+======
 	  __                    
 	  /        /            
      ----/-----__-/----__----__-
 	/    /   /   /___) /   )
       _/_ __(___/___(___ _(___(_
      ====================
-idea:
+
 
  we have program_A & program_C  which use program_B
  after new update of B program_A works correctly with B but C crashed down
@@ -59,18 +61,12 @@ end of the story
 
 1.     Firstly it parse syscalls from config or command line
        ./fp.py -c config ... || ./fp.py "open:/A:/B" -- evalprog
-
-1.2    Calculate MD5 hash from options+config string 
-
-1.5    See does we have already launched FP with such config
+1.2      Calculate MD5 hash from options+config string 
+1.5      See does we have already launched FP with such config
        (usually /tmp/$USER/FILE_PRELOAD/confs.md5)
-
-1.7    If not launched:
-
+1.7      If not launched:
 2.     Generate .cpp file (usually in /tmp/$USER/FILE_PRELOAD/cpp/)
-
 3.     Compile it to shared lib and put to some ..E_PRELOAD/so/)
-
 4.     launch command line
        (smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd
 
