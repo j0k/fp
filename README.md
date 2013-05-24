@@ -77,9 +77,9 @@ end of the story
 
 3.     Compile it to shared lib and put to some ..E_PRELOAD/so/)
 
-4.     launch command line
-
-       ( smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd )
+4.     
+     launch command line
+     ( smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd )
 
 FILES
 =======
