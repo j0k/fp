@@ -1,24 +1,20 @@
 fp = FILE_PRELOAD
-==
-
+=====
      _|_|_|_| _|_|_|  
      _|       _|    _|
      _|_|_|   _|_|_|  
      _|       _|      
      _|       _|      
-   
 File Preload like LD_PRELOAD
 
-
 Idea
-======
-	  __                    
-	  /        /            
+=====
+          __                    
+          /        /            
      ----/-----__-/----__----__-
 	/    /   /   /___) /   )
       _/_ __(___/___(___ _(___(_
      ====================
-
 
  we have program_A & program_C  which use program_B
  after new update of B program_A works correctly with B but C crashed down
@@ -45,11 +41,9 @@ Cute way will be the next:
             $: FILE_PRELOAD -C "execve+open+stat:/usr/bin/program_B:/usr/bin/program_B.old" -- ./program_C
     
     (other) $: ./program_A   
-
  
 ======================
 end of the story
-
       _______________ 
      < HOW ITS WORKS >
       --------------- 
@@ -74,7 +68,6 @@ end of the story
 
 FILES
 =======
-
       .____ _ .     .____    _____
       /     | /     /       (     
       |__.  | |     |__.     `--. 
