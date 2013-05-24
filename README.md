@@ -75,13 +75,15 @@ end of the story
 4.  launch command line
     (smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd
 
+FILES
+=======
+
       .____ _ .     .____    _____
       /     | /     /       (     
       |__.  | |     |__.     `--. 
       |     | |     |           | 
       /     / /---/ /----/ \___.' 
      ======================
-
      | file             | description                                      |
      |------------------+--------------------------------------------------|
      | ./               |                                                  |
@@ -100,7 +102,6 @@ end of the story
      | └── test         |                                                  |
      | --> └── test.sh  |                                                  |
      |                  |                                                  |
-
      ======================
 
 
