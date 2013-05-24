@@ -55,9 +55,9 @@ end of the story
       --------------- 
 	     \   ^__^
 	      \  (<>)\_______
-		 (__)\       )\/\
-		  @ ||----w |
-		    ||     ||
+	         (__)\       )\/\
+	          @ ||----w |
+	            ||     ||
 
 1.     Firstly it parse syscalls from config or command line
 
@@ -79,7 +79,7 @@ end of the story
 
 4.     launch command line
 
-       (smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd
+       ( smth like LD_PRELOAD=/tmp/$USER/FILE_PRELOAD/so/02402012b7.so cat /etc/passwd )
 
 FILES
 =======
