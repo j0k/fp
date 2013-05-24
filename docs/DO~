@@ -1,0 +1,8 @@
+
+* /fp.py "A+f:/tmp:/etc;A+f:/boot:/etc" -- ls -al /tmp /boot
+  make it working; without:
+
+  ls: cannot access /tmp/updatedb.conf: No such file or directory
+  ls: cannot access /tmp/mke2fs.conf: No such file or directory
+  ls: cannot access /tmp/krb5.conf.example: No such file or directory
+  ls: cannot access /tmp/mtab: No such file or directory
