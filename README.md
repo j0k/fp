@@ -44,6 +44,7 @@ Cute way will be the next:
  
 ======================
 end of the story
+
       _______________ 
      < HOW ITS WORKS >
       --------------- 
