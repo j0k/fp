@@ -41,7 +41,7 @@
 |            | freopen (we need?) | FILE *freopen(const char *path, const char *mode, FILE *stream);           |           | +     |
 |            | freopen64          |                                                                            |           | +     |
 |            |                    |                                                                            |           |       |
-|            |                    |                                                                            |           |       |
+| __fxstatat |                    | int (int vers, int fd, const char *filename, struct stat *buf, int flag)   |           | +/-   |
 |            |                    |                                                                            |           |       |
 |            |                    |                                                                            |           |       |
 

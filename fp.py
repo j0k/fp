@@ -25,7 +25,8 @@ syscalls = [ #synonims
     ["__lxstat64",     "sx" , "Ax"  , "a"], 
     ["stat64"    ,     "s"  , "A"   , "a"], 
     ["__xstat"   ,     "sx" , "Axx"], 
-    ["__xstat64" ,     "sx" , "Axx"], 
+    ["__xstat64" ,     "sx" , "Axx"],
+    ["__fxstatat",     "sxx"],
     ["freopen"   ,     "fo" , "op"  , "A" , "a"], 
     ["freopen64" ,     "fo" , "op"  , "A" , "a"]
 ]
@@ -326,6 +327,15 @@ def gen___xstat64(files):
                   "ver, newpath.c_str(), buf")
     return code.replace("BODY",gen_tfiles0(files))
 
+def gen___fxstatat(files):
+    #__fxstatat (int vers, int fd, const char *filename, struct stat *buf, int flag)
+
+    code = gen_t0("I", "__fxstatat",
+                  "I ver, I fd, const C *p, struct stat *buf, I flag",
+                  "ver, fd, newpath.c_str(), buf, flag")
+    return code.replace("BODY",gen_tfiles0(files))
+
+
 configuration = ""
 def header():
     global options
@@ -477,7 +487,7 @@ if __name__ == "__main__" :
         stderr,stdout = devnull,devnull
     
     #sys.stdout = stdout
-    conf = [args[0]] if (options.config==None) else read_config(options.config)
+    conf = [options.configstr] if (options.config==None ) else read_config(options.config)
     push_config_section(str(options), conf)
     confs = read_md5()
     preload = None 
