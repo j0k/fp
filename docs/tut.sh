@@ -315,6 +315,15 @@ f22
 EOF
 	    ;;
 	12) cat <<EOF
+ _______          _________          _______  _______ 
+(  ____ \|\     /|\__   __/|\     /|(  ____ )(  ____ \\
+| (    \/| )   ( |   ) (   | )   ( || (    )|| (    \/
+| (__    | |   | |   | |   | |   | || (____)|| (__    
+|  __)   | |   | |   | |   | |   | ||     __)|  __)   
+| (      | |   | |   | |   | |   | || (\ (   | (      
+| )      | (___) |   | |   | (___) || ) \ \__| (____/\\
+|/       (_______)   )_(   (_______)|/   \__/(_______/
+
 Want say/ask smth or advice:
  - just PM
 
@@ -322,16 +331,16 @@ Have an idea of any proj || startup || little service:
  - lets do it quick. 
 
 Maybe you have an idea of cryptocurrency service?
-- welcome 
+ - welcome 
 
 Or you just want to connect APL/J/K langs to some project?
-- Oh e! PM.
+ - Oh e! PM.
 
-contacts:
-- silkneo h0td0g Gmail dot com
+contact:
+ - silkneo h0td0g Gmail dot com
 
-donate opts:
-- ( BTC: 1dreamMuQ1owg1AJhP3QVzwoMUXpQa3cU  ,
+donate options:
+ -( BTC: 1dreamMuQ1owg1AJhP3QVzwoMUXpQa3cU  ,
     LTC: Ldreamtf2nyRQS5F9wNSfqUC16wP8LDriP ,
     CNC: CKBwtFiB4UrCCnEjXAWbkDdULg87y5fwD2 ,
     YAC: YHKanDc9bidaDTwzGUTu9DMwCcW7FeWSKC )
@@ -366,3 +375,4 @@ anyk
 textpart 11
 anyk
 textpart 12
+
